@@ -37,7 +37,6 @@ function onGalleryClick(event) {
     instance.show();
 
     window.addEventListener('keydown', onKeyboardClose);
-    divLightbox.classList.add("is-open");
 }
 
 function onKeyboardClose(event) {
@@ -49,6 +48,7 @@ function onKeyboardClose(event) {
 
 function closeFullImage() {
     const divLightbox = document.querySelector("div.basicLightbox");
+
     setTimeout(() => {
         if (divLightbox.classList.contains("basicLightbox--visible")) {
             divLightbox.parentElement.removeChild(divLightbox);
