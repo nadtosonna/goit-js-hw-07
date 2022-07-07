@@ -53,5 +53,5 @@ function closeFullImage() {
         if (divLightbox.classList.contains("basicLightbox--visible")) {
             divLightbox.parentElement.removeChild(divLightbox);
         }
-    }, 410);
+    }, 400);
 }
