@@ -32,26 +32,20 @@ function onGalleryClick(event) {
     }
     const fullImageUrl = event.target.dataset.source;
     const instance = basicLightbox.create(`
-    <img src="${fullImageUrl}">`);
-
+    <img src="${fullImageUrl}">`, {
+        onShow: () => {
+            window.addEventListener('keydown', onKeyboardClose);
+        },
+        onClose: () => {
+            window.removeEventListener('keydown', onKeyboardClose);
+        }
+    });
     instance.show();
-
-    window.addEventListener('keydown', onKeyboardClose);
+    window.param = instance;
 }
 
 function onKeyboardClose(event) {
     if (event.keyCode === 27) {
-        closeFullImage();
-        window.removeEventListener('keydown', onKeyboardClose);
+        event.currentTarget.param.close(() => window.removeEventListener('keydown', onKeyboardClose));
     }
-}
-
-function closeFullImage() {
-    const divLightbox = document.querySelector("div.basicLightbox");
-
-    setTimeout(() => {
-        if (divLightbox.classList.contains("basicLightbox--visible")) {
-            divLightbox.parentElement.removeChild(divLightbox);
-        }
-    }, 400);
 }
